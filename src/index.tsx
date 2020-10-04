@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './App';
+import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+import store from './store';
 
 ReactDOM.render(
     <React.StrictMode>
-        <h1>Smash Trainer</h1>
+        <App />
     </React.StrictMode>,
     document.getElementById('root'),
 );
