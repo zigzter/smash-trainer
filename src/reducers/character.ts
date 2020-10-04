@@ -1,9 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { characterSelected } from '../components/actions';
+import { characterSelected } from '../actions';
 
-const characterReducer = createReducer({}, (builder) => {
+const characterReducer = createReducer({ characterSelected: '' }, (builder) => {
     builder.addCase(characterSelected, (state, action) => {
-        console.log(action);
+        state.characterSelected = action.payload;
     });
 });
 

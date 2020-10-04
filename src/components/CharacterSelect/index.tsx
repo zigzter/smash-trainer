@@ -1,8 +1,9 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { SyntheticEvent, useState, FC, Fragment } from 'react';
+import { useDispatch } from 'react-redux';
 import Select from 'react-select';
 import images from '../../constants/imageSources';
 import { roster } from '../../constants/roster';
-import { characterSelected } from '../actions';
+import { characterSelected } from '../../actions';
 
 const options = roster.map((character) => ({
     value: character,
@@ -19,19 +20,21 @@ const Option = ({ children, innerProps }: { children: any; innerProps: any }) =>
     );
 };
 
-const CharacterSelect = () => {
+const CharacterSelect: FC = () => {
     const [character, setCharacter] = useState('');
+    const dispatch = useDispatch();
     const onChange = ({ value }: any) => {
         setCharacter(value);
     };
     const onSubmit = (event: SyntheticEvent) => {
         event.preventDefault();
+        dispatch(characterSelected(character));
     };
     return (
-        <div>
+        <>
             <Select onChange={onChange} components={{ Option, SingleValue: Option }} options={options} />
-            <button onSubmit={onSubmit}>Submit</button>
-        </div>
+            <button onClick={onSubmit}>Submit</button>
+        </>
     );
 };
 

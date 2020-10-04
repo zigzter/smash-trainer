@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { connect } from 'react-redux';
 import CharacterSelect from './components/CharacterSelect';
+import RoutineCreation from './components/RoutineCreation';
 
-const App = () => {
-    return (
-        <div>
-            <CharacterSelect />
-        </div>
-    );
+const App: FC = ({ characterSelected }: any) => {
+    return <>{characterSelected ? <RoutineCreation /> : <CharacterSelect />}</>;
 };
 
-export default App;
+const mapStateToProps = (state: any) => ({
+    characterSelected: state.characterSelected,
+});
+
+export default connect(mapStateToProps)(App);
