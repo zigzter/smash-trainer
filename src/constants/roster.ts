@@ -79,4 +79,4 @@ export const roster = [
     'Hero',
     'Banjo & Kazooie',
     'Terry',
-];
+] as const;

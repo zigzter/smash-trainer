@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState, FC, Fragment } from 'react';
+import React, { SyntheticEvent, useState, FC } from 'react';
 import { useDispatch } from 'react-redux';
 import Select from 'react-select';
 import images from '../../constants/imageSources';

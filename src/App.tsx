@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import CharacterSelect from './components/CharacterSelect';
 import RoutineCreation from './components/RoutineCreation';
 
-const App: FC = ({ characterSelected }: any) => {
+interface Props {
+    characterSelected: boolean;
+}
+
+const App: FC<Props> = ({ characterSelected }) => {
     return <>{characterSelected ? <RoutineCreation /> : <CharacterSelect />}</>;
 };
 
