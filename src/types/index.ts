@@ -5,11 +5,19 @@ type Character = Characters[number];
 
 export interface IMovePayload {
     character: Character;
+    routine: string;
     moves: string[];
 }
 
-export interface IMovesState {
-    moves: {
-        [character in Character]?: string[];
+export interface IRoutinePayload {
+    character: Character;
+    name: string;
+}
+
+export interface IRoutineState {
+    routines: {
+        [character in Character]?: {
+            [routineName: string]: string[][];
+        };
     };
 }

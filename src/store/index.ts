@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import characterReducer from '../reducers/character';
-import movesReducer from '../reducers/moves';
+import routinesReducer from '../reducers/routines';
 
 const store = configureStore({
     reducer: {
         characterReducer,
-        movesReducer,
+        routinesReducer,
     },
 });
 
