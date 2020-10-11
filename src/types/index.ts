@@ -14,7 +14,5 @@ export interface IRoutinePayload {
 }
 
 export interface IRoutinesState {
-    routines: {
-        [routineName: string]: string[][];
-    };
+    [routineName: string]: string[][];
 }

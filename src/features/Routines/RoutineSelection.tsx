@@ -25,9 +25,13 @@ const RoutineSelection: FC<IProps> = ({ routines, dispatch }: IProps) => {
         setRoutineName(event.target.value);
     };
 
+    const onBlur = () => {
+        setRoutineName(routineName.trim());
+    };
+
     return (
         <>
-            {isCreating && <input type="text" onChange={onChange} />}
+            {isCreating && <input type="text" onChange={onChange} value={routineName} onBlur={onBlur} />}
             <button onClick={onClick}>{isCreating ? 'Save Routine' : 'Create Routine'}</button>
         </>
     );

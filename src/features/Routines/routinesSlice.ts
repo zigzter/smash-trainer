@@ -1,9 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IMovePayload, IRoutinePayload, IRoutinesState } from '../../types';
 
-const initialState: IRoutinesState = {
-    routines: {},
-};
+const initialState: IRoutinesState = {};
 
 const routinesSlice = createSlice({
     name: 'routines',
@@ -11,13 +9,13 @@ const routinesSlice = createSlice({
     reducers: {
         routineCreated(state, action: PayloadAction<IRoutinePayload>) {
             const { name } = action.payload;
-            if (!state.routines[name]) {
-                state.routines[name] = [];
+            if (!state[name]) {
+                state[name] = [];
             }
         },
         movesAdded(state, action: PayloadAction<IMovePayload>) {
             const { moves, routine } = action.payload;
-            state.routines[routine].push(moves);
+            state[routine].push(moves);
         },
     },
 });
