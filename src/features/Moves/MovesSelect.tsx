@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import Select from 'react-select';
-import { attacks, directions, moves, modifiers } from '../../../constants/moves';
+import { attacks, directions, moves, modifiers } from '../../constants/moves';
 
 const options = [...attacks, ...directions, ...moves, ...modifiers].map((move) => {
     return {

@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import MovesSelect from './MovesSelect';
+import MovesSelect from '../Moves/MovesSelect';
 
 const RoutineCreation: FC = () => {
     const [moveChains, setMoveChains] = useState<string[][]>([]);

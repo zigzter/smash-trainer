@@ -1,14 +1,17 @@
-import { configureStore } from '@reduxjs/toolkit';
-import characterReducer from '../reducers/character';
-import routinesReducer from '../reducers/routines';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import rosterReducer from '../features/Roster/rosterSlice';
+import routinesReducer from '../features/Routines/routinesSlice';
+
+const rootReducer = combineReducers({
+    roster: rosterReducer.reducer,
+    routines: routinesReducer.reducer,
+});
 
 const store = configureStore({
-    reducer: {
-        characterReducer,
-        routinesReducer,
-    },
+    reducer: rootReducer,
 });
 
 export type AppDispatch = typeof store.dispatch;
+export type AppState = ReturnType<typeof rootReducer>;
 
 export default store;

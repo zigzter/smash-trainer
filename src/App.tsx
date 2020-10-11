@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
-import CharacterSelect from './components/CharacterSelect';
-import RoutineSelection from './components/RoutineSelection';
+import CharacterSelect from './features/Roster/CharacterSelect';
+import RoutineSelection from './features/Routines/RoutineSelection';
 
 interface Props {
     characterSelected: boolean;

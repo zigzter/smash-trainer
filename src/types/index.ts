@@ -14,12 +14,7 @@ export interface IRoutinePayload {
     name: string;
 }
 
-export interface IReduxState {
-    characterSelected: TCharacter;
-    routines: IRoutineState;
-}
-
-export interface IRoutineState {
+export interface IRoutinesState {
     routines: {
         [character in TCharacter]?: {
             [routineName: string]: string[][];
