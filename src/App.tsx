@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import CharacterSelect from './components/CharacterSelect';
-import RoutineCreation from './components/RoutineCreation';
+import RoutineSelection from './components/RoutineSelection';
 
 interface Props {
     characterSelected: boolean;
 }
 
 const App: FC<Props> = ({ characterSelected }) => {
-    return <>{characterSelected ? <RoutineCreation /> : <CharacterSelect />}</>;
+    return <>{characterSelected ? <RoutineSelection /> : <CharacterSelect />}</>;
 };
 
 const mapStateToProps = (state: any) => ({

@@ -1,22 +1,27 @@
 import { roster } from '../constants/roster';
 
 type Characters = typeof roster;
-type Character = Characters[number];
+export type TCharacter = Characters[number];
 
 export interface IMovePayload {
-    character: Character;
+    character: TCharacter;
     routine: string;
     moves: string[];
 }
 
 export interface IRoutinePayload {
-    character: Character;
+    character: TCharacter;
     name: string;
+}
+
+export interface IReduxState {
+    characterSelected: TCharacter;
+    routines: IRoutineState;
 }
 
 export interface IRoutineState {
     routines: {
-        [character in Character]?: {
+        [character in TCharacter]?: {
             [routineName: string]: string[][];
         };
     };
