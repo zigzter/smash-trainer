@@ -1,29 +1,28 @@
-import React, { FC, useState } from 'react';
+import React, { ChangeEvent, FC, useState } from 'react';
 import { connect } from 'react-redux';
 import { routineCreated } from './routinesSlice';
 import { AppDispatch, AppState } from '../../store';
-import { IRoutinesState, TCharacter } from '../../types';
+import { IRoutinesState } from '../../types';
 
 interface IProps {
     routines: IRoutinesState;
     dispatch: AppDispatch;
-    characterSelected: TCharacter | '';
 }
 
-const RoutineSelection: FC<IProps> = ({ routines, dispatch, characterSelected }: IProps) => {
+const RoutineSelection: FC<IProps> = ({ routines, dispatch }: IProps) => {
     const [isCreating, setIsCreating] = useState(false);
     const [routineName, setRoutineName] = useState('');
 
     const onClick = () => {
         if (isCreating) {
-            dispatch(routineCreated({ character: characterSelected, name: routineName }));
+            dispatch(routineCreated({ name: routineName }));
         } else {
             setIsCreating(true);
         }
     };
 
-    const onChange = (event) => {
-        console.log(event.target);
+    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setRoutineName(event.target.value);
     };
 
     return (
@@ -36,7 +35,6 @@ const RoutineSelection: FC<IProps> = ({ routines, dispatch, characterSelected }:
 
 const mapStateToProps = (state: AppState) => ({
     routines: state.routines,
-    characterSelected: state.roster.characterSelected,
 });
 
 export default connect(mapStateToProps)(RoutineSelection);

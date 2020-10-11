@@ -10,14 +10,11 @@ export interface IMovePayload {
 }
 
 export interface IRoutinePayload {
-    character: TCharacter;
     name: string;
 }
 
 export interface IRoutinesState {
     routines: {
-        [character in TCharacter]?: {
-            [routineName: string]: string[][];
-        };
+        [routineName: string]: string[][];
     };
 }

@@ -10,14 +10,14 @@ const routinesSlice = createSlice({
     initialState,
     reducers: {
         routineCreated(state, action: PayloadAction<IRoutinePayload>) {
-            const { character, name } = action.payload;
-            if (!state.routines[character]) {
-                state.routines[character] = { [name]: [] };
+            const { name } = action.payload;
+            if (!state.routines[name]) {
+                state.routines[name] = [];
             }
         },
         movesAdded(state, action: PayloadAction<IMovePayload>) {
-            const { character, moves, routine } = action.payload;
-            state.routines[character]![routine].push(moves);
+            const { moves, routine } = action.payload;
+            state.routines[routine].push(moves);
         },
     },
 });
