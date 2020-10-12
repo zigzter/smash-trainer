@@ -4,15 +4,26 @@ type Characters = typeof roster;
 export type TCharacter = Characters[number];
 
 export interface IMovePayload {
-    character: TCharacter;
-    routine: string;
+    routineId: string;
     moves: string[];
+    id: string;
+    createdAt: string;
 }
 
 export interface IRoutinePayload {
     name: string;
+    id: string;
+    createdAt: string;
+    moveChains: IMoveChain[];
 }
 
-export interface IRoutinesState {
-    [routineName: string]: string[][];
+export interface IMoveChain {
+    id: string;
+    moves: string[];
+}
+
+export interface IRoutine {
+    name: string;
+    id: string;
+    moveChains: IMoveChain[];
 }

@@ -1,11 +1,11 @@
 import React, { ChangeEvent, FC, useState } from 'react';
 import { connect } from 'react-redux';
-import { routineCreated } from './routinesSlice';
+import { movesAdded, routineCreated } from './routinesSlice';
 import { AppDispatch, AppState } from '../../store';
-import { IRoutinesState } from '../../types';
+import { IRoutine } from '../../types';
 
 interface IProps {
-    routines: IRoutinesState;
+    routines: IRoutine[];
     dispatch: AppDispatch;
 }
 
@@ -15,7 +15,7 @@ const RoutineSelection: FC<IProps> = ({ routines, dispatch }: IProps) => {
 
     const onClick = () => {
         if (isCreating) {
-            dispatch(routineCreated({ name: routineName }));
+            dispatch(routineCreated(routineName));
         } else {
             setIsCreating(true);
         }
