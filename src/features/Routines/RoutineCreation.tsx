@@ -1,19 +1,46 @@
-import React, { FC, useState } from 'react';
-import MovesSelect from '../Moves/MovesSelect';
+import React, { ChangeEvent, FC, useState } from 'react';
+import { connect } from 'react-redux';
+import { routineCreated } from './routinesSlice';
+import { AppDispatch, AppState } from '../../store';
+import { IRoutine } from '../../types';
 
-const RoutineCreation: FC = () => {
-    const [moveChains, setMoveChains] = useState<string[][]>([]);
-    const onClick = (moves: string[]) => {
-        setMoveChains([...moveChains, moves]);
+interface IProps {
+    routines: IRoutine[];
+    dispatch: AppDispatch;
+    onCreate(routine: IRoutine): void;
+}
+
+const RoutineSelection: FC<IProps> = ({ routines, dispatch, onCreate }: IProps) => {
+    const [isCreating, setIsCreating] = useState(false);
+    const [routineName, setRoutineName] = useState('');
+
+    const onClick = () => {
+        if (isCreating) {
+            const { payload: routine } = dispatch(routineCreated(routineName));
+            onCreate(routine);
+        } else {
+            setIsCreating(true);
+        }
     };
+
+    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setRoutineName(event.target.value);
+    };
+
+    const onBlur = () => {
+        setRoutineName(routineName.trim());
+    };
+
     return (
         <>
-            {moveChains.map((moves) => (
-                <p key={moves[0]}>{moves.join(', ')}</p>
-            ))}
-            <MovesSelect onClick={onClick} />
+            {isCreating && <input type="text" onChange={onChange} value={routineName} onBlur={onBlur} />}
+            <button onClick={onClick}>{isCreating ? 'Save Routine' : 'Create Routine'}</button>
         </>
     );
 };
 
-export default RoutineCreation;
+const mapStateToProps = (state: AppState) => ({
+    routines: state.routines,
+});
+
+export default connect(mapStateToProps)(RoutineSelection);
