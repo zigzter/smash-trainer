@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FC, useState } from 'react';
 import { connect } from 'react-redux';
+
 import { routineCreated } from './routinesSlice';
 import { AppDispatch, AppState } from '../../store';
 import { IRoutine } from '../../types';
@@ -7,7 +8,7 @@ import { IRoutine } from '../../types';
 interface IProps {
     routines: IRoutine[];
     dispatch: AppDispatch;
-    onCreate(routine: IRoutine): void;
+    onCreate(id: string): void;
 }
 
 const RoutineSelection: FC<IProps> = ({ routines, dispatch, onCreate }: IProps) => {
@@ -17,7 +18,7 @@ const RoutineSelection: FC<IProps> = ({ routines, dispatch, onCreate }: IProps) 
     const onClick = () => {
         if (isCreating) {
             const { payload: routine } = dispatch(routineCreated(routineName));
-            onCreate(routine);
+            onCreate(routine.id);
         } else {
             setIsCreating(true);
         }

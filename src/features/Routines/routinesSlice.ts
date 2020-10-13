@@ -29,7 +29,7 @@ const routinesSlice = createSlice({
                     routine.moveChains.push(action.payload);
                 }
             },
-            prepare: (payload: IMovePayload) => ({
+            prepare: (payload: { routineId: string; moves: string[] }) => ({
                 payload: {
                     ...payload,
                     id: nanoid(),

@@ -1,6 +1,9 @@
 import React, { FC, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Select from 'react-select';
+
 import { attacks, directions, moves, modifiers } from '../../constants/moves';
+import { movesAdded } from './routinesSlice';
 
 const options = [...attacks, ...directions, ...moves, ...modifiers].map((move) => {
     return {
@@ -9,17 +12,18 @@ const options = [...attacks, ...directions, ...moves, ...modifiers].map((move) =
     };
 });
 
-interface Props {
-    onClick(moves: string[]): void;
+interface IProps {
+    routineId: string;
 }
 
-const MovesSelect: FC<Props> = ({ onClick }) => {
+const MovesSelect: FC<IProps> = ({ routineId }: IProps) => {
     const [moves, setMoves] = useState<string[]>([]);
+    const dispatch = useDispatch();
     const onChange = (value: any) => {
         setMoves(value.map((move: { value: string }) => move.value));
     };
     const onSubmit = () => {
-        onClick(moves);
+        dispatch(movesAdded({ moves, routineId }));
         setMoves([]);
     };
     return (

@@ -15,16 +15,16 @@ interface IProps {
 }
 
 const App: FC<IProps> = ({ routines }: IProps) => {
-    const [selectedRoutine, setSelectedRoutine] = useState<IRoutine>();
+    const [selectedRoutineId, setSelectedRoutineId] = useState('');
 
-    const onCreate = (routine: IRoutine) => {
-        setSelectedRoutine(routine);
+    const onCreate = (id: string) => {
+        setSelectedRoutineId(id);
     };
 
-    if (!selectedRoutine) {
+    if (!selectedRoutineId) {
         return <RoutineCreation onCreate={onCreate} />;
     } else {
-        return <RoutineView routine={(selectedRoutine as unknown) as IRoutine} />;
+        return <RoutineView routineId={selectedRoutineId} />;
     }
 };
 
