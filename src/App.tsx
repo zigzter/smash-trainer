@@ -3,6 +3,7 @@ import React, { FC, useState } from 'react';
 import { connect } from 'react-redux';
 
 import RoutineCreation from './features/Routines/RoutineCreation';
+import RoutinePreview from './features/Routines/RoutinePreview';
 import RoutineView from './features/Routines/RoutineView';
 import { AppState } from './store';
 import { IRoutine } from './types';
@@ -25,7 +26,11 @@ const App: FC<IProps> = ({ routines }: IProps) => {
         return (
             <>
                 {routines.map((routine) => (
-                    <p key={routine.id}>{routine.name}</p>
+                    <RoutinePreview
+                        selectRoutine={() => setSelectedRoutineId(routine.id)}
+                        key={routine.id}
+                        routine={routine}
+                    />
                 ))}
                 <RoutineCreation onCreate={onCreate} />
             </>
