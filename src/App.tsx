@@ -22,7 +22,14 @@ const App: FC<IProps> = ({ routines }: IProps) => {
     };
 
     if (!selectedRoutineId) {
-        return <RoutineCreation onCreate={onCreate} />;
+        return (
+            <>
+                {routines.map((routine) => (
+                    <p key={routine.id}>{routine.name}</p>
+                ))}
+                <RoutineCreation onCreate={onCreate} />
+            </>
+        );
     } else {
         return <RoutineView routineId={selectedRoutineId} />;
     }
