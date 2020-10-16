@@ -1,6 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import rosterReducer from '../features/Roster/rosterSlice';
-import routinesReducer from '../features/Routines/routinesSlice';
+import routinesSlice from '../features/Routines/routinesSlice';
+import selectionSlice from '../features/Selection/selectionSlice';
 
 const preloadedState = localStorage.getItem('appState')
     ? JSON.parse(localStorage.getItem('appState') as string)
@@ -12,8 +12,8 @@ const preloadedState = localStorage.getItem('appState')
       };
 
 const rootReducer = combineReducers({
-    roster: rosterReducer.reducer,
-    routines: routinesReducer.reducer,
+    routines: routinesSlice.reducer,
+    selection: selectionSlice.reducer,
 });
 
 const store = configureStore({
@@ -27,5 +27,7 @@ store.subscribe(() => {
 
 export type AppDispatch = typeof store.dispatch;
 export type AppState = ReturnType<typeof rootReducer>;
+export type SelectionState = ReturnType<typeof selectionSlice.reducer>;
+export type RoutinesState = ReturnType<typeof routinesSlice.reducer>;
 
 export default store;

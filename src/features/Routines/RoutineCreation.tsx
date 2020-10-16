@@ -8,17 +8,15 @@ import { IRoutine } from '../../types';
 interface IProps {
     routines: IRoutine[];
     dispatch: AppDispatch;
-    onCreate(id: string): void;
 }
 
-const RoutineSelection: FC<IProps> = ({ routines, dispatch, onCreate }: IProps) => {
+const RoutineSelection: FC<IProps> = ({ routines, dispatch }: IProps) => {
     const [isCreating, setIsCreating] = useState(false);
     const [routineName, setRoutineName] = useState('');
 
     const onClick = () => {
         if (isCreating) {
-            const { payload: routine } = dispatch(routineCreated(routineName));
-            onCreate(routine.id);
+            dispatch(routineCreated(routineName));
         } else {
             setIsCreating(true);
         }

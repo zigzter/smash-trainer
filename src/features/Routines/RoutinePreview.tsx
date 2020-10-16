@@ -1,15 +1,17 @@
 import React, { FC } from 'react';
+import { useDispatch } from 'react-redux';
 import { IRoutine } from '../../types';
+import { selectRoutine } from '../Selection/selectionSlice';
 
 interface IProps {
     routine: IRoutine;
-    selectRoutine(): void;
 }
 
-const RoutinePreview: FC<IProps> = ({ routine, selectRoutine }: IProps) => {
+const RoutinePreview: FC<IProps> = ({ routine }: IProps) => {
+    const dispatch = useDispatch();
     return (
         <div
-            onClick={selectRoutine}
+            onClick={() => dispatch(selectRoutine(routine.id))}
             style={{ cursor: 'pointer', borderRadius: 4, border: '1px solid black', padding: 5, margin: 5 }}
         >
             {routine.name}

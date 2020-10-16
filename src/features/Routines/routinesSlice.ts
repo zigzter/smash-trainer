@@ -20,6 +20,9 @@ const routinesSlice = createSlice({
                 },
             }),
         },
+        routineDeleted: (state, action: PayloadAction<string>) => {
+            return state.filter((routine) => routine.id !== action.payload);
+        },
         movesAdded: {
             reducer: (state, action: PayloadAction<IMovePayload>) => {
                 console.log(action.payload);
@@ -40,6 +43,6 @@ const routinesSlice = createSlice({
     },
 });
 
-export const { routineCreated, movesAdded } = routinesSlice.actions;
+export const { routineCreated, movesAdded, routineDeleted } = routinesSlice.actions;
 
 export default routinesSlice;

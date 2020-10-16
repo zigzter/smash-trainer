@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import Select from 'react-select';
 import images from '../../constants/imageSources';
 import { roster } from '../../constants/roster';
-import { characterSelected } from './rosterSlice';
 
 const options = roster.map((character) => ({
     value: character,
@@ -28,7 +27,7 @@ const CharacterSelect: FC = () => {
     };
     const onSubmit = (event: SyntheticEvent) => {
         event.preventDefault();
-        dispatch(characterSelected(character));
+        // dispatch(characterSelected(character));
     };
     return (
         <>
