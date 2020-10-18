@@ -1,3 +1,4 @@
+import { Container } from '@material-ui/core';
 import { createSelector } from '@reduxjs/toolkit';
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
@@ -18,21 +19,23 @@ interface IProps {
     dispatch: AppDispatch;
 }
 
-const App: FC<IProps> = ({ routines, dispatch }: IProps) => {
+const App: FC<IProps> = ({ routines }: IProps) => {
     return (
-        <Router>
-            <Switch>
-                <Route path="/create" component={RoutineCreation} />
-                <Route path="/routine/:id" component={RoutineView} />
-                <Route path="/">
-                    <>
-                        {routines.map((routine) => (
-                            <RoutinePreview key={routine.id} routine={routine} />
-                        ))}
-                    </>
-                </Route>
-            </Switch>
-        </Router>
+        <Container>
+            <Router>
+                <Switch>
+                    <Route path="/create" component={RoutineCreation} />
+                    <Route path="/routine/:id" component={RoutineView} />
+                    <Route path="/">
+                        <>
+                            {routines.map((routine) => (
+                                <RoutinePreview key={routine.id} routine={routine} />
+                            ))}
+                        </>
+                    </Route>
+                </Switch>
+            </Router>
+        </Container>
     );
 };
 

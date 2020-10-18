@@ -6,6 +6,7 @@ import { AppDispatch, AppState } from '../../store';
 import { routineDeleted } from './routinesSlice';
 import { IRoutine } from '../../types';
 import MovesSelect from './MovesSelect';
+import { Chip } from '@material-ui/core';
 
 interface IMapState {
     dispatch: AppDispatch;
@@ -27,9 +28,7 @@ const RoutineView: FC<IProps> = ({ routine, dispatch, history }: IProps) => {
         <div>
             <p onClick={() => history.push('/')}>X</p>
             <h1>{routine.name}</h1>
-            {routine.moveChains.map(({ moves }) => (
-                <p key={Math.random()}>{moves.join(' -> ')}</p>
-            ))}
+            {routine.moveChains.map(({ moves }) => moves.map((move) => <Chip label={move} />))}
             <MovesSelect routineId={routine.id} />
             <button onClick={handleDelete}>Delete Routine</button>
         </div>
