@@ -1,11 +1,11 @@
 import { createSelector } from '@reduxjs/toolkit';
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import RoutineCreation from './features/Routines/RoutineCreation';
 import RoutinePreview from './features/Routines/RoutinePreview';
 import RoutineView from './features/Routines/RoutineView';
-import { selectRoutine } from './features/Selection/selectionSlice';
 import { AppDispatch, AppState, SelectionState } from './store';
 import { IRoutine } from './types';
 
@@ -18,19 +18,22 @@ interface IProps {
     dispatch: AppDispatch;
 }
 
-const App: FC<IProps> = ({ routines, selection, dispatch }: IProps) => {
-    if (!selection.routine) {
-        return (
-            <>
-                {routines.map((routine) => (
-                    <RoutinePreview key={routine.id} routine={routine} />
-                ))}
-                <RoutineCreation />
-            </>
-        );
-    } else {
-        return <RoutineView goHome={() => dispatch(selectRoutine(''))} routineId={selection.routine} />;
-    }
+const App: FC<IProps> = ({ routines, dispatch }: IProps) => {
+    return (
+        <Router>
+            <Switch>
+                <Route path="/create" component={RoutineCreation} />
+                <Route path="/routine/:id" component={RoutineView} />
+                <Route path="/">
+                    <>
+                        {routines.map((routine) => (
+                            <RoutinePreview key={routine.id} routine={routine} />
+                        ))}
+                    </>
+                </Route>
+            </Switch>
+        </Router>
+    );
 };
 
 const mapStateToProps = (state: AppState) => ({
