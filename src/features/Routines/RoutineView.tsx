@@ -13,7 +13,7 @@ interface IMapState {
     routine: IRoutine | undefined;
 }
 
-type IProps = IMapState & RouteComponentProps;
+type IProps = IMapState & RouteComponentProps<{ id: string }>;
 
 const RoutineView: FC<IProps> = ({ routine, dispatch, history }: IProps) => {
     if (!routine) {
@@ -28,14 +28,14 @@ const RoutineView: FC<IProps> = ({ routine, dispatch, history }: IProps) => {
         <div>
             <p onClick={() => history.push('/')}>X</p>
             <h1>{routine.name}</h1>
-            {routine.moveChains.map(({ moves }) => moves.map((move) => <Chip label={move} />))}
+            {routine.moveChains.map(({ moves }) => moves.map((move) => <Chip key={Math.random()} label={move} />))}
             <MovesSelect routineId={routine.id} />
             <button onClick={handleDelete}>Delete Routine</button>
         </div>
     );
 };
 
-const mapStateToProps = (state: AppState, props: any) => ({
+const mapStateToProps = (state: AppState, props: IProps) => ({
     routine: state.routines.find((routine) => routine.id === props.match.params.id),
 });
 
