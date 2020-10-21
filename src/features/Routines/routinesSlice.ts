@@ -16,33 +16,33 @@ const routinesSlice = createSlice({
                     name,
                     id: nanoid(),
                     createdAt: new Date().toString(),
-                    moveChains: [],
+                    moveChainCollections: [],
                 },
             }),
         },
         routineDeleted: (state, action: PayloadAction<string>) => {
             return state.filter((routine) => routine.id !== action.payload);
         },
-        movesAdded: {
-            reducer: (state, action: PayloadAction<IMovePayload>) => {
-                console.log(action.payload);
-                const { routineId } = action.payload;
-                const routine = state.find((routine) => routine.id === routineId);
-                if (routine) {
-                    routine.moveChains.push(action.payload);
-                }
-            },
-            prepare: (payload: { routineId: string; moves: string[] }) => ({
-                payload: {
-                    ...payload,
-                    id: nanoid(),
-                    createdAt: new Date().toString(),
-                },
-            }),
-        },
+        // movesAdded: {
+        //     reducer: (state, action: PayloadAction<IMovePayload>) => {
+        //         console.log(action.payload);
+        //         const { routineId } = action.payload;
+        //         const routine = state.find((routine) => routine.id === routineId);
+        //         if (routine) {
+        //             routine.moveChainCollections.push(action.payload);
+        //         }
+        //     },
+        //     prepare: (payload: { routineId: string; moves: string[] }) => ({
+        //         payload: {
+        //             ...payload,
+        //             id: nanoid(),
+        //             createdAt: new Date().toString(),
+        //         },
+        //     }),
+        // },
     },
 });
 
-export const { routineCreated, movesAdded, routineDeleted } = routinesSlice.actions;
+export const { routineCreated, routineDeleted } = routinesSlice.actions;
 
 export default routinesSlice;

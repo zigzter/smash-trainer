@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import Select from 'react-select';
 
 import { attacks, directions, moves, modifiers } from '../../constants/moves';
-import { movesAdded } from './routinesSlice';
+// import { movesAdded } from './routinesSlice';
 
 const options = [...attacks, ...directions, ...moves, ...modifiers].map((move) => {
     return {
@@ -23,7 +23,7 @@ const MovesSelect: FC<IProps> = ({ routineId }: IProps) => {
         setMoves(value.map((move: { value: string }) => move.value));
     };
     const onSubmit = () => {
-        dispatch(movesAdded({ moves, routineId }));
+        // dispatch(movesAdded({ moves, routineId }));
         setMoves([]);
     };
     return (

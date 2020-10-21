@@ -14,7 +14,7 @@ export interface IRoutinePayload {
     name: string;
     id: string;
     createdAt: string;
-    moveChains: IMoveChain[];
+    moveChainCollections: IMoveChainCollection[];
 }
 
 export interface IMoveChain {
@@ -22,8 +22,13 @@ export interface IMoveChain {
     moves: string[];
 }
 
+export interface IMoveChainCollection {
+    id: string;
+    moveChainCollection: IMoveChain[];
+}
+
 export interface IRoutine {
     name: string;
     id: string;
-    moveChains: IMoveChain[];
+    moveChainCollections: IMoveChainCollection[];
 }

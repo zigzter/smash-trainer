@@ -5,8 +5,8 @@ import { RouteComponentProps } from 'react-router-dom';
 import { AppDispatch, AppState } from '../../store';
 import { routineDeleted } from './routinesSlice';
 import { IRoutine } from '../../types';
-import MovesSelect from './MovesSelect';
-import { Chip } from '@material-ui/core';
+import MovesSelect from '../Moves/MovesSelect';
+import MoveChain from '../Moves/MoveChain';
 
 interface IMapState {
     dispatch: AppDispatch;
@@ -28,7 +28,9 @@ const RoutineView: FC<IProps> = ({ routine, dispatch, history }: IProps) => {
         <div>
             <p onClick={() => history.push('/')}>X</p>
             <h1>{routine.name}</h1>
-            {routine.moveChains.map(({ moves }) => moves.map((move) => <Chip key={Math.random()} label={move} />))}
+            {routine.moveChainCollections.map(({ moveChainCollection }) =>
+                moveChainCollection.map(({ moves }) => <MoveChain moves={moves} />),
+            )}
             <MovesSelect routineId={routine.id} />
             <button onClick={handleDelete}>Delete Routine</button>
         </div>

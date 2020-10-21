@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 import { createSelector } from '@reduxjs/toolkit';
 import { RouteComponentProps } from 'react-router-dom';
+import { connect } from 'react-redux';
 import RoutinePreview from './RoutinePreview';
+import RoutineCreation from './RoutineCreation';
 import { IRoutine } from '../../types';
 import { AppDispatch, AppState, SelectionState } from '../../store';
-import { connect } from 'react-redux';
 
 const selectRoutines = (state: AppState) => state.routines;
 const getRoutines = createSelector(selectRoutines, (routines) => routines);
@@ -24,6 +25,7 @@ const RoutinePreviews: FC<Props> = ({ routines, history }: Props) => {
             {routines.map((routine) => (
                 <RoutinePreview key={routine.id} onClick={() => navigateToRoutine(routine.id)} routine={routine} />
             ))}
+            <RoutineCreation />
         </div>
     );
 };
