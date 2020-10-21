@@ -12,7 +12,7 @@ const App: FC = () => {
             <Router>
                 <Switch>
                     <Route path="/create" component={RoutineCreation} />
-                    <Route path="/routine/:id" component={RoutineView} />
+                    <Route path="/routines/:id" component={RoutineView} />
                     <Route path="/" component={RoutinePreviews} />
                 </Switch>
             </Router>
