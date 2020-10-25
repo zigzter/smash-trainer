@@ -1,5 +1,5 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
-import { IMovePayload, IRoutinePayload, IRoutine } from '../../types';
+import { IMoveChainCollectionPayload, IRoutinePayload, IRoutine, IMoveChain, IMove } from '../../types';
 
 const initialState: IRoutine[] = [];
 
@@ -23,26 +23,33 @@ const routinesSlice = createSlice({
         routineDeleted: (state, action: PayloadAction<string>) => {
             return state.filter((routine) => routine.id !== action.payload);
         },
-        // movesAdded: {
-        //     reducer: (state, action: PayloadAction<IMovePayload>) => {
-        //         console.log(action.payload);
-        //         const { routineId } = action.payload;
-        //         const routine = state.find((routine) => routine.id === routineId);
-        //         if (routine) {
-        //             routine.moveChainCollections.push(action.payload);
-        //         }
-        //     },
-        //     prepare: (payload: { routineId: string; moves: string[] }) => ({
-        //         payload: {
-        //             ...payload,
-        //             id: nanoid(),
-        //             createdAt: new Date().toString(),
-        //         },
-        //     }),
-        // },
+        moveChainCollectionAdded: {
+            reducer: (state, action: PayloadAction<IMoveChainCollectionPayload>) => {
+                console.log(action.payload);
+                const { routineId, id, moveChainCollection } = action.payload;
+                const routine = state.find((routine) => routine.id === routineId);
+                if (routine) {
+                    routine.moveChainCollections.push({ id, moveChainCollection });
+                }
+            },
+            prepare: (payload: { routineId: string; moveChainCollection: IMove[][] }) => {
+                const moveChainsWithIDs = payload.moveChainCollection.map((moves) => ({
+                    moves,
+                    id: nanoid(),
+                }));
+                return {
+                    payload: {
+                        ...payload,
+                        moveChainCollection: moveChainsWithIDs,
+                        id: nanoid(),
+                        createdAt: new Date().toString(),
+                    },
+                };
+            },
+        },
     },
 });
 
-export const { routineCreated, routineDeleted } = routinesSlice.actions;
+export const { routineCreated, moveChainCollectionAdded, routineDeleted } = routinesSlice.actions;
 
 export default routinesSlice;

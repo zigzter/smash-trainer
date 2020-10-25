@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 
@@ -7,6 +7,7 @@ import { routineDeleted } from './routinesSlice';
 import { IRoutine } from '../../types';
 import MovesSelect from '../Moves/MovesSelect';
 import MoveChain from '../Moves/MoveChain';
+import { Button } from '@material-ui/core';
 
 interface IMapState {
     dispatch: AppDispatch;
@@ -16,12 +17,17 @@ interface IMapState {
 type IProps = IMapState & RouteComponentProps<{ id: string }>;
 
 const RoutineView: FC<IProps> = ({ routine, dispatch, history }: IProps) => {
+    const [isEditing, setIsEditing] = useState(false);
     if (!routine) {
         return null;
     }
 
     const handleDelete = () => {
         dispatch(routineDeleted(routine.id));
+    };
+
+    const handleEdit = () => {
+        setIsEditing((prevState) => !prevState);
     };
 
     return (
@@ -31,8 +37,9 @@ const RoutineView: FC<IProps> = ({ routine, dispatch, history }: IProps) => {
             {routine.moveChainCollections.map(({ moveChainCollection }) =>
                 moveChainCollection.map(({ moves }) => <MoveChain moves={moves} />),
             )}
-            <MovesSelect routineId={routine.id} />
-            <button onClick={handleDelete}>Delete Routine</button>
+            {isEditing && <MovesSelect routineId={routine.id} />}
+            <Button onClick={handleEdit}>Edit Routine</Button>
+            <Button onClick={handleDelete}>Delete Routine</Button>
         </div>
     );
 };

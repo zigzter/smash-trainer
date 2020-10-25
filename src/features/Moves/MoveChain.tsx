@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { createStyles, makeStyles, styled } from '@material-ui/core';
+import { IMove } from '../../types';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -43,7 +44,7 @@ const Move: FC<MProps> = ({ move, index, lastIndex }) => {
 };
 
 interface Props {
-    moves?: string[];
+    moves?: IMove[];
 }
 
 const test = ['short hop', 'fast fall', 'neutral', 'air'];

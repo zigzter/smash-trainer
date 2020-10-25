@@ -3,9 +3,9 @@ import { roster } from '../constants/roster';
 type Characters = typeof roster;
 export type TCharacter = Characters[number];
 
-export interface IMovePayload {
+export interface IMoveChainCollectionPayload {
     routineId: string;
-    moves: string[];
+    moveChainCollection: IMoveChain[];
     id: string;
     createdAt: string;
 }
@@ -17,9 +17,14 @@ export interface IRoutinePayload {
     moveChainCollections: IMoveChainCollection[];
 }
 
+export interface IMove {
+    name: string;
+    type: string;
+}
+
 export interface IMoveChain {
     id: string;
-    moves: string[];
+    moves: IMove[];
 }
 
 export interface IMoveChainCollection {
