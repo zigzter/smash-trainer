@@ -7,6 +7,17 @@ import { moveOptions } from '../../constants/moves';
 import { IMove } from '../../types';
 import { moveChainCollectionAdded } from '../Routines/routinesSlice';
 
+const selectStyles = {
+    menu: (provided: any) => ({
+        ...provided,
+        backgroundColor: '#212121',
+    }),
+    option: (provided: any, { isFocused }: any) => ({
+        ...provided,
+        backgroundColor: isFocused ? '#424242' : 'transparent',
+    }),
+};
+
 interface IProps {
     routineId: string;
 }
@@ -17,7 +28,7 @@ const MovesSelect: FC<IProps> = ({ routineId }: IProps) => {
     const dispatch = useDispatch();
 
     const onChange = (value: any) => {
-        setMoveChain(value.map((move: any) => ({ name: move.value, type: move.type })));
+        setMoveChain(value);
     };
 
     const addMoveChain = () => {
@@ -30,7 +41,7 @@ const MovesSelect: FC<IProps> = ({ routineId }: IProps) => {
 
     return (
         <>
-            <Select isMulti options={moveOptions} onChange={onChange} />
+            <Select isMulti styles={selectStyles} options={moveOptions} onChange={onChange} />
             <Button variant="outlined" color="primary" onClick={addMoveChain}>
                 Add Move
             </Button>
