@@ -1,7 +1,11 @@
 import { roster } from '../constants/roster';
+import { moveOptions } from '../constants/moves';
 
 type Characters = typeof roster;
 export type TCharacter = Characters[number];
+
+const movesOnly = moveOptions[0].options;
+export type TMoveOptions = typeof movesOnly;
 
 export interface IMoveChainCollectionPayload {
     routineId: string;
